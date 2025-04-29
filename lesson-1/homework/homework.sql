@@ -66,3 +66,9 @@ TCL stands for "Transaction Control Language" and it uses these: begin transacti
    begin transaction
    commit
    rollback
+
+create table Students
+INSERT INTO Students (StudentID, Name, Age) 
+   VALUES ('76', 'Joe', '22');
+   VALUES ('56', 'Ben', '21');
+   VALUES ('88', 'Will', '19');
