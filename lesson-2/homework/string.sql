@@ -1,97 +1,98 @@
---create database F28-class2ß
-use F28-class2
+-- create table
+create table employees (empid int, name varchar(50), salary decimal(10, 2))
 
---DDL and DML commands
+-- insert
+insert into employees (empid, name, salary) 
+values (1, 'brandon', 6100.00)
+insert into employees (empid, name, salary) 
+values (2, 'bob', 5200.00), (3, 'mike', 5700.00)
 
---Creating SQL objects
-  create table Students (ID int, Name varchar(50), Age int)
+-- update
+update employees 
+set salary = 7000.00 
+where empid = 1
 
+-- delete
+delete from employees 
+where empid = 2
 
--- null does not meant empty
+-- alter
+alter table employees 
+alter column name varchar(100)
+alter table employees 
+add department varchar(50)
+alter table employees 
+alter column salary float
 
-create schema HR
+-- departments table
+create table departments (departmentid int primary key, departmentname varchar(50))
+alter table departments
+add salary decimal(10,2)
 
-select * from system.databases
+-- removing employees table
+truncate table employees
 
-select * information_schema.tables
-select * information_schema.columns
+-- inserting into departments
+select * from departments
+insert into departments (departmentid, departmentname)
+select 1, 'management' union all
+select 2, 'hr' union all
+select 3, 'finance' union all
+select 4, 'it' union all
+select 5, 'marketing'
+update departments 
+set salary = 5000
+where departmentid = 1       
 
---Inserting data
-select * Students
-insert into Student values (1, 'Joe', 26)
-insert into Student values (2, 'Ben', 23)(3, 'George' 24)
-insert into Student(ID, name) values (4, 'Margaret')
+-- removing employees table
+truncate table employees
 
+alter table employees
+drop column department
 
-insert into Student select 5, 'Dudley' 24
-union all 
-select 7, 'Fischer', 25
+-- renaming
+exec sp_rename 'employees', 'staffmembers'
 
-select into Copy_Students from Students
-
-delete from Copy_Students where ID = 2 
-
-
---drop 
-
-drop database [test2]
-drop table Copy_Students
-
---truncate
-select * from Copy_Students 
-truncate table Copy_Students
-
-
--- Altering table 
-select * in Copy_Students from Students
-
-select * from Copy_Students
-
-alter table Copy_Students 
-add email varchar (35)
-
-alter table Copy_Students 
-drop column email
-
-alter table Copy_Students
-alter column Age varchar (20)
-
-
-select AVG(age) from Copy_Students
-
---deleting
-
-delete from Copy_Students where age = null
-
--- this won't work cause it's false. null doesn't equal to anything. correct version is below. 
-
-delete from Copy_Students where age is null
-
---update
-
-Select * from Copy_Students
-update Copy_Students
-set Age = 30 where ID = 3
-
-update Copy_Students
-set name  = 'Bobby'
-
---this changes every name to Bobby
-
-drop table Copy_Students 
-select * into Copy_Students from Students
-
-select * from Copy_Students 
-
-update Copy_Updates set age = 25 where age is null
-
-set ansi_nulls on
-
-	
--- altering database name  
-
-s
+-- complete removal
+drop table departments
 
 
 
+create table Products(ProductID int primary key, ProductName varchar(50), Category varchar(50), Price decimal(10,2))
+alter table Products
+add StockQuantity  int default 50
 
+exec sp_rename 'Products.Category',  'ProductCategory'
+
+select * from Products
+
+insert into products (productid, productname, productcategory, price, stockquantity)
+values (1, 'Carrots', 'Vegetables', 1, 50)
+
+insert into products (productid, productname, productcategory, price, stockquantity)
+values (2, 'Apples', 'Fruits', 2, 50)
+
+insert into products (productid, productname, productcategory, price, stockquantity)
+values (3, 'Tables', 'Furniture', 50.00, 50)
+
+insert into products (productid, productname, productcategory, price, stockquantity)
+values (4, 'Coca Cola', 'Drinks', 2, 50)
+
+insert into products (productid, productname, productcategory, price, stockquantity)
+values (5, 'Blender', 'Electronics', 20.00, 50)
+
+
+--back up
+select * into products_backup
+from products;
+
+--rename 
+exec sp_rename 'Products', 'Inventory';
+alter table Inventory
+alter column Price float;
+
+--adding indentity
+alter table inventory
+add Productcode int identity(1000, 5);
+
+select * from Inventory
