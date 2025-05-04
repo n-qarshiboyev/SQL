@@ -163,11 +163,37 @@ CREATE TABLE Orders (OrderID INT PRIMARY KEY,OrderDate DATE,BuyerID INT,FOREIGN 
 
 
 
+Hard-Level Tasks (10)
 
+17) 
+create table Customers (CustomerID int primary key, CustomerName varchar (50), CustomerAge int, constraint check_age  check (CustomerAge > 18))
 
+18) 
+create table Stocks (Quantity int identity (100,10), Price decimal (10,2))
 
+19) 
+create table Order_Details (BuyerID int, OrderID int, Amount int, Price decimal (10,2), primary key (BuyerID, OrderID))
 
+20)
+ISNULL and COALESCE are both used to handle null values but they have some differences. ISNULL is used when we need to 
+one value to show something else than null, but COALESCE can be used for several values at the same time. 
+  
+--Example 
+SELECT ISNULL(NULL, 'N/A')  -- Result: 'N/A'
 
+SELECT COALESCE(NULL, NULL, 'Hello', 'World')  -- Result: 'Hello'
+  
+21)
+create table Employees1 (EmpID int not null, Empname varchar (50), EmpEmail varchar (100), primary key (EmpID), unique (EmpEmail))
 
-
-
+22)
+create table Buyers(BuyersID int primary key, Name varchar (50))
+create table Purchases (
+    PurchaseID int primary key,
+    CustomerID int,
+    Price decimal(10,2),
+    constraint FK_pur_cus
+        foreign key (CustomerID)
+        references Buyers(BuyersID)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE)
