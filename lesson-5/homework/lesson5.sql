@@ -4,7 +4,7 @@
   select ProductName as Name from Products;
 
 2) Write a query that uses an alias to rename the Customers table as Client for easier reference.
-  select * from Customer as Client;
+  select * from Customers as Client;
 
 3) Use UNION to combine results from two queries that select ProductName from Products and ProductName from Products_Discounted.
   select ProductName from Products union select ProductName from Products_Discounted;
@@ -18,9 +18,9 @@
 6) Write a query that uses CASE to create a conditional column that displays 'High' if Price > 1000, and 'Low' if Price <= 1000 from Products table.
   select case when Price > 1000 then 'High',
               when Price < 1000 then 'Low' end as High_Low from Products;
-
+              else 'Mid' end as HML from Products;	
 7) Use IIF to create a column that shows 'Yes' if Stock > 100, and 'No' otherwise (Products_Discounted table, StockQuantity column).
-  select IIF(StockQuantity > 100, 'Yes', 'No') from Product_discounted;
+  select IIF(StockQuantity > 100, 'Yes', 'No') from Product_Discounted;
 
 
 --Medium-Level Tasks
