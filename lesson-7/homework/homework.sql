@@ -31,15 +31,23 @@
 
   --Medium-Level Tasks (9)
 11)Write a query to calculate the total sales and average sales for each product category from the Sales table.
+  select sum()
 12)Write a query to count the number of employees from the Department HR.
+  select DeptID, count('HR') from Employees group by DeptID;
 13)Write a query that finds the highest and lowest Salary by department in the Employees table.(DeptID is enough, if you dont have DeptName).
+  select DeptID, max(distinct Salary) as highest_salary, min(distinct Salary) as lowest_salary from Employees group by DeptID;
 14)Write a query to calculate the average salary per Department.(DeptID is enough, if you dont have DeptName).
+  select DeptID, avg(Salary) as average_salary from Employees group by DeptID;  
 15)Write a query to show the AVG salary and COUNT(*) of employees working in each department.(DeptID is enough, if you dont have DeptName).
+  select DeptID, avg(salary) as avg_salary, count(employeeid) as number_of_worker from employees group by DeptID;   
 16)Write a query to filter product categories with an average price greater than 400.
+  select Category, avg(Price) from Products group by Category having avg(Price) > 400;
 17)Write a query that calculates the total sales for each year in the Sales table.
+  select year(saledate) as each_year, sum(saleamount) as total_sales from Sales group by year(saledate) order by each_year;
 18)Write a query to show the list of customers who placed at least 3 orders.
+  select customerID, count(orderID) as Orders from Customers group by customerID having count(orderID) =< 3;
 19) Write a query to filter out Departments with average salary expenses greater than 60000.(DeptID is enough, if you dont have DeptName).
-
+  select DeptID, avg(Salary) as avg_salary from Employees group by DeptID having avg(Salary) > 60000;
   --Hard-Level Tasks (6)
 20)Write a query that shows the average price for each product category, and then filter categories with an average price greater than 150.
 21)Write a query to calculate the total sales for each Customer, then filter the results to include only Customers with total sales over 1500.
