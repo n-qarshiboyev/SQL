@@ -50,8 +50,14 @@
   select DeptID, avg(Salary) as avg_salary from Employees group by DeptID having avg(Salary) > 60000;
   --Hard-Level Tasks (6)
 20)Write a query that shows the average price for each product category, and then filter categories with an average price greater than 150.
+  select Category, AVG(price) as average_price from Products group by Category having AVG(price) > 150;
 21)Write a query to calculate the total sales for each Customer, then filter the results to include only Customers with total sales over 1500.
+  select customer_id, sum(sale_amount) as total_sales from sales group by customer_id having sum(sale_amount) > 1500;
 22)Write a query to find the total and average salary of employees in each department, and filter the output to include only departments with an average salary greater than 65000.
-23)Write a query to find total sales amount for the orders which costs more than $50 for each customer along with their least purchases.(least amount might be lower than $50).
+  select department_id, sum(salary) as total_salary, avg(salary) as average_salary from employees group by department_id having avg(salary) > 65000;
+23)Write a query to find total sales amount for the orders which costs more than $50 for each customer along with their least  purchases.(least amount might be lower than $50).
+  select customer_id, sum(case when order_amount > 50 then order_amount else 0 end) as total_sales_over_50, min(order_amount) as least_purchase from orders group by customer_id;
 24)Write a query that calculates the total sales and counts unique products sold in each month of each year, and then filter the months with at least 2 products sold.(Orders)
+  select year(order_date) as year, month(order_date) as month, sum(sale_amount) as total_sales, c
 25)Write a query to find the MIN and MAX order quantity per Year. From orders table.
+  select year(order_date) as year, min(order_quantity) as min_quantity, max(order_quantity) as max_quantity from orders group by year(order_date);
