@@ -1,5 +1,5 @@
 --easy
-  1.	select p.productname, s.suppliername from products p cross join suppliers s;
+        1.	select p.productname, s.suppliername from products p cross join suppliers s;
 	2.	select d.departmentname, e.employeename from departments d cross join employees e;
 	3.	select s.suppliername, p.productname from products p join suppliers s on p.supplierid = s.supplierid;
 	4.	select c.customername, o.orderid from customers c join orders o on c.customerid = o.customerid;
