@@ -85,28 +85,44 @@
   select e1.name as Managers,
        e2.name as Employees,
        e1.managerid
-from employees e1
-join employees e2 on e1.managerid = e2.managerid
-where e1.employeeid < e2.employeeid;
+  from employees e1
+  join employees e2 on e1.managerid = e2.managerid
+  where e1.employeeid < e2.employeeid;
 
 15 - Using the Orders and Customers tables, write a query to list all orders placed in 2022 along with the customer name.
 🔁 Expected Columns: OrderID, OrderDate, FirstName, LastName
+  select o.OrderID, O.OrderDate, c.FirstName, c.LastName from Orders o 
+  join Customers c on o.CustomerID = c.CustomerID
+  where year(o.OrderDate) = 2022;
 
 16 - Using the Employees and Departments tables, write a query to return employees from the 'Sales' department whose salary is above 60000.
 🔁 Expected Columns: EmployeeName, Salary, DepartmentName
+  select e.name as EmployeeName, e.salary, d.DepartmentName from Employees e 
+  join Departments d on e.DepartmentID = d.DepartmentID
+  where e.Salary > 60000;
 
 17 - Using the Orders and Payments tables, write a query to return only those orders that have a corresponding payment.
 🔁 Expected Columns: OrderID, OrderDate, PaymentDate, Amount
+  select o.OrderID, o.OrderDate, p.PaymentDate, p.Amount from Orders o 
+  inner join Payments p on o.OrderID = p.OrderID;
 
 18 - Using the Products and Orders tables, write a query to find products that were never ordered.
 🔁 Expected Columns: ProductID, ProductName
+  select p.ProductID, p.ProductName from Products p 
+  left join orders o on p.ProductID = o.ProductID
+  where o.ProductID is null; 
 
 -- Hard-Level Tasks (9)
 19 - Using the Employees table, write a query to find employees whose salary is greater than the average salary in their own departments.
 🔁 Expected Columns: EmployeeName, Salary
+  select e.name as employee_name, e.salary from employees e
+  where e.salary > (select AVG(e1.salary) from employees e1 where e1.departmentid = e.departmentid);
 
 20 - Using the Orders and Payments tables, write a query to list all orders placed before 2020 that have no corresponding payment.
 🔁 Expected Columns: OrderID, OrderDate
+  select o.orderID, o.OrderDate from Orders o 
+  left join Payments p on o.OrderID = p.OrderID 
+  where o.OrderDate > '2020-01-01' and p.OrderID is null; 
 
 21 - Using the Products and Categories tables, write a query to return products that do not have a matching category.
 🔁 Expected Columns: ProductID, ProductName
