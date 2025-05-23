@@ -126,21 +126,58 @@
 
 21 - Using the Products and Categories tables, write a query to return products that do not have a matching category.
 🔁 Expected Columns: ProductID, ProductName
+  select p.ProductID, p.ProductName
+  from Products p
+  left join Categories c on p.CategoryID = c.CategoryID
+  where c.CategoryID is null;
 
 22 - Using the Employees table, write a query to find employees who report to the same manager and earn more than 60000.
 🔁 Expected Columns: Employee1, Employee2, ManagerID, Salary
+  select e1.EmployeeName as Employee1,
+       e2.EmployeeName as Employee2,
+       e1.ManagerID,
+       e1.Salary
+  from Employees e1
+  join Employees e2 on e1.ManagerID = e2.ManagerID
+  where e1.Salary > 60000
+  and e2.Salary > 60000
+  and e1.EmployeeID < e2.EmployeeID;
 
 23 - Using the Employees and Departments tables, write a query to return employees who work in departments which name starts with the letter 'M'.
 🔁 Expected Columns: EmployeeName, DepartmentName
+  select e.EmployeeName, d.DepartmentName
+  from Employees e
+  join Departments d on e.DepartmentID = d.DepartmentID  
+  where d.DepartmentName like 'M%';
 
 24 - Using the Products and Sales tables, write a query to list sales where the amount is greater than 500, including product names.
 🔁 Expected Columns: SaleID, ProductName, SaleAmount
+ select s.SaleID, p.ProductName, s.SaleAmount
+ from Sales s
+ join Products p on s.ProductID = p.ProductID
+ where s.SaleAmount > 500;
 
 25 - Using the Students, Courses, and Enrollments tables, write a query to find students who have not enrolled in the course 'Math 101'.
 🔁 Expected Columns: StudentID, StudentName
+  select s.StudentID, s.StudentName
+  from Students s
+  where s.StudentID not in (
+    select e.StudentID
+    from Enrollments e
+    join Courses c on e.CourseID = c.CourseID
+    where c.CourseName = 'Math 101'
+);
 
 26 - Using the Orders and Payments tables, write a query to return orders that are missing payment details.
 🔁 Expected Columns: OrderID, OrderDate, PaymentID
+  select o.OrderID, o.OrderDate, p.PaymentID
+  from Orders o
+  left join Payments p on o.OrderID = p.OrderID
+  where p.PaymentID is null;
 
 27- Using the Products and Categories tables, write a query to list products that belong to either the 'Electronics' or 'Furniture' category.
 🔁 Expected Columns: ProductID, ProductName, CategoryName
+  select p.ProductID, p.ProductName, c.CategoryName
+  from Products p
+  join Categories c on p.CategoryID = c.CategoryID
+  where c.CategoryName in ('Electronics', 'Furniture');
