@@ -118,9 +118,64 @@
     left join departments d on e.DepartmentID = d.DepartmentID
     where d.departmentname = 'Sales' and year(e.hiredate) > 2020-01-01;
 
+-----
+14)
+    Return: CustomerName, OrderID, Address, OrderDate
+    Task: List all orders made by customers in the USA whose address starts with 4 digits.
+    Tables Used: Customers, Orders
 
+    select c.firstname + ' ' + c.lastname, o.OrderID, c.address, o.orderdate from customers c 
+    left join orders o on c.CustomerID = o.CustomerID
+    where c.Country = 'USA' and c.Address like '[0-9][0-9][0-9][0-9]%';
+    
+15) 
+    Return: ProductName, Category, SaleAmount
+    Task: Display product sales for items in the Electronics category or where the sale amount exceeded 350.
+    Tables Used: Products, Sales
 
+    select p.ProductName, p.category, s.SaleAmount from Products p 
+    left join sales s on p.productid = s.ProductID
+    where p.Category = 'Electronics' and s.SaleAmount > 350;
 
+16) 
+    Return: CategoryName, ProductCount
+    Task: Show the number of products available in each category.
+    Tables Used: Products, Categories
+
+    select c.CategoryName, count(p.stockquantity) 
+    as ProductCount from Categories c 
+    join products p on c.categoryid = p.Category
+    group by c.CategoryName; 
+
+17)
+    Return: CustomerName, City, OrderID, Amount
+    Task: List orders where the customer is from Los Angeles and the order amount is greater than 300.
+    Tables Used: Customers, Orders
+
+    select c.firstname + ' ' + c.lastname as CustomerName, c.City, o.OrderID, o.TotalAmount as Amount from Customers c
+    join Orders o on c.CustomerID = o.CustomerID
+    where c.City = 'Los Angeles' and o.TotalAmount > 300
+    order by  o.TotalAmount desc;
+
+18) 
+    Return: EmployeeName, DepartmentName
+    Task: Display employees who are in the HR or Finance department, or whose name contains at least 4 vowels.
+    Tables Used: Employees, Departments
+
+    select e.name as EmployeeName, d.DepartmentName from Employees e 
+    join Departments d on d.DepartmentID = e.DepartmentID
+    where d.DepartmentName in ('HR', 'Finance') or 
+    e.name like '%[a-u-i-e]';
+
+19)
+    Return: EmployeeName, DepartmentName, Salary
+    Task: Show employees who are in the Sales or Marketing department and have a salary above 60000.
+    Tables Used: Employees, Departments
+
+    select e.name as EmployeeName, d.DepartmentName, e.salary from Employees e 
+    join Departments d on d.DepartmentID = e.DepartmentID
+    where d.DepartmentName in ('Sales', 'Marketing') and e.salary > 60000;
+    
 
 
 
